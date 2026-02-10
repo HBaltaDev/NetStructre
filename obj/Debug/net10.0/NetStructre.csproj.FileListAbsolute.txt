@@ -31,3 +31,4 @@ C:\Users\Administrator\RiderProjects\NetStructre\NetStructre\obj\Debug\net10.0\r
 C:\Users\Administrator\RiderProjects\NetStructre\NetStructre\obj\Debug\net10.0\NetStructre.pdb
 C:\Users\Administrator\RiderProjects\NetStructre\NetStructre\obj\Debug\net10.0\NetStructre.genruntimeconfig.cache
 C:\Users\Administrator\RiderProjects\NetStructre\NetStructre\obj\Debug\net10.0\ref\NetStructre.dll
+C:\Users\Administrator\RiderProjects\NetStructre\NetStructre\obj\Debug\net10.0\NetStructre.sourcelink.json

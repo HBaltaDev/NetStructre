@@ -1,11 +1,14 @@
 using System.Reflection;
+using System.Text.Json;
+using NetStructre.Applications.UserManagement.Abstract;
+using NetStructre.UserManagement.Dto.Request;
 
 namespace NetStructre;
 
 public class HttpListener
 {
     private readonly Dictionary<string, MethodInfo> _actions;
-    private Dictionary<string, Type> _parameterTypes;
+    private readonly Dictionary<string, Type> _parameterTypes;
     private readonly IServiceProvider _serviceProvider;
     private readonly Type _type;
     
@@ -18,7 +21,12 @@ public class HttpListener
         
         using var scope = _serviceProvider.CreateScope();
         
-        var methods = typeof(ApplicationStorage).GetMethods().Where(m => m.ReturnType == typeof(Task<ResponseBase>));
+        var methods = Assembly.GetExecutingAssembly()
+            .GetTypes()
+            .Where(t => typeof(IApplicationService).IsAssignableFrom(t) && t.IsInterface)
+            .SelectMany(t => t.GetMethods())
+            .Where(m => m.ReturnType == typeof(Task<string>));
+
         
         // Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
         
@@ -67,7 +75,31 @@ public class HttpListener
         // context.Response.Headers.Append("Content-Type", "application/json");
         // context.Response.StatusCode = result.StatusCode;
         // await context.Response.WriteAsync(result.Response);
+
+        var actionName = "test";
         
+        if (context.Request.Headers["Action"].Count != 0)
+        {
+            actionName = context.Request.Headers["Action"];
+        }
+        
+        //var request = JsonSerializer.Deserialize<SignInRequest>(context.Request.Body);
+        
+        if (_actions.TryGetValue(actionName!, out var actionMethod) && _parameterTypes.TryGetValue(actionName!, out var paramType))
+        {
+            var dtoRequest = paramType.Name != "RequestBase" ? await JsonSerializer.DeserializeAsync(context.Request.Body, paramType) : null;
+            
+            var serviceType = actionMethod.DeclaringType!;
+
+            var service = _serviceProvider.GetRequiredService(serviceType);
+
+            var responseObj = actionMethod.Invoke(service, [dtoRequest])!;
+
+            var response = await (Task<string>)(responseObj);
+            
+            Console.WriteLine(response);
+        }
+
         context.Response.Headers.Append("Content-Type", "application/json");
         context.Response.StatusCode = 200;
         await context.Response.WriteAsync("Successful");

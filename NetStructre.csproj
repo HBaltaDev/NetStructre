@@ -12,7 +12,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Applications\" />
+      <Folder Include="Infrastructure\Dto\" />
     </ItemGroup>
 
 </Project>

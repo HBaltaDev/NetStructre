@@ -1,11 +1,18 @@
-using Microsoft.Extensions.DependencyInjection;
+using NetStructre.Applications.UserManagement;
+using NetStructre.Applications.UserManagement.Abstract;
+using NetStructre.UserManagement.Domain.Abstract;
+using NetStructre.UserManagement.Domain.User;
 
-namespace NetStructre;
+namespace NetStructre.UserManagement.DI;
 
-public static class ApplicationStorage
+public static class DIService
 {
-    public static IServiceCollection AddApplicationServices(this IServiceCollection services)
+    public static IServiceCollection AddUserManagement(this IServiceCollection services)
     {
+
+        services.AddScoped<IUserManagementService, UserManagementService>();
+        services.AddScoped<IUserService, UserService>();
+        
         // Infrastructure
         // services.AddScoped<IDbContext, DbContext>();
         //
