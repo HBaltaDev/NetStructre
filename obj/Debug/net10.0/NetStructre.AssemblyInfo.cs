@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("NetStructre")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e7a9405399fb4e278e0c52fd1357d2546552d03e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6eff42552c3b97883347648b03c41ff3e2c39152")]
 [assembly: System.Reflection.AssemblyProductAttribute("NetStructre")]
 [assembly: System.Reflection.AssemblyTitleAttribute("NetStructre")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

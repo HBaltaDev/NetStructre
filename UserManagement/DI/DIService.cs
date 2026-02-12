@@ -11,6 +11,8 @@ public static class DIService
     {
 
         services.AddScoped<IUserManagementService, UserManagementService>();
+        services.AddScoped<IDtoAssembler, DtoAssembler>();
+        
         services.AddScoped<IUserService, UserService>();
         
         // Infrastructure

@@ -1,6 +1,7 @@
 using System.Reflection;
 using System.Text.Json;
 using NetStructre.Applications.UserManagement.Abstract;
+using NetStructre.Infrastructure.DtoBase.ResponseBase;
 using NetStructre.Infrastructure.ExectionHandling;
 using NetStructre.UserManagement.Dto.Request;
 
@@ -26,7 +27,7 @@ public class HttpListener
             .GetTypes()
             .Where(t => typeof(IApplicationService).IsAssignableFrom(t) && t.IsInterface)
             .SelectMany(t => t.GetMethods())
-            .Where(m => m.ReturnType == typeof(Task<string>));
+            .Where(m => m.ReturnType == typeof(Task<ResponseBase>));
 
         
         // Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
@@ -96,11 +97,9 @@ public class HttpListener
 
                 var service = _serviceProvider.GetRequiredService(serviceType);
 
-                var responseObj = actionMethod.Invoke(service, [dtoRequest])!;
-
-                response = await (Task<string>)(responseObj);
-            
-                Console.WriteLine(response);
+                var responseObj = await (Task<ResponseBase>)actionMethod.Invoke(service, [dtoRequest])!;
+                
+                response = JsonSerializer.Serialize(responseObj, responseObj.GetType());
             }
 
             context.Response.Headers.Append("Content-Type", "application/json");
