@@ -1,9 +1,7 @@
 using NetStructre.Applications.UserManagement.Abstract;
 using NetStructre.Infrastructure.DtoBase.ResponseBase;
-using NetStructre.Infrastructure.ExectionHandling;
 using NetStructre.UserManagement.Domain.Abstract;
 using NetStructre.UserManagement.Dto.Request;
-using StatusCodes = NetStructre.Infrastructure.ExectionHandling.StatusCodes;
 
 namespace NetStructre.Applications.UserManagement;
 
