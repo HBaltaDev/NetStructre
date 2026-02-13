@@ -1,6 +1,6 @@
-using NetStructre.Infrastructure.Dto.RequestBase;
+using Infrastructure.DtoBase.RequestBase;
 
-namespace NetStructre.UserManagement.Dto.Request;
+namespace Server.UserManagement.Dto.Request;
 
 public record SignInRequest : RequestBase
 {

@@ -1,7 +1,6 @@
-using Microsoft.Extensions.DependencyInjection;
-using NetStructre.UserManagement.DI;
+using Server.UserManagement.DI;
 
-namespace NetStructre;
+namespace Server;
 
 public static class ApplicationStorage
 {

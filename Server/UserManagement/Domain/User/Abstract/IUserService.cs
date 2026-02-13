@@ -1,4 +1,4 @@
-namespace NetStructre.UserManagement.Domain.Abstract;
+namespace Server.UserManagement.Domain.Abstract;
 
 public interface IUserService
 {

@@ -1,10 +1,18 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-using Microsoft.Extensions.Hosting;
-using NetStructre;
+using Infrastructure.ExceptionHandling;
+using Server;
+using Server.Infrastructure.ExectionHandling.Localization;
+
 var builder = Host.CreateApplicationBuilder(args);
 
 builder.Services.AddApplicationServices();
 builder.Services.AddHostedService<Worker>();
+        
+builder.Services.AddSingleton<IErrorLocalizer, ErrorLocalizer>();
 
-await builder.Build().RunAsync();
+var app = builder.Build();
+
+ServiceException.Configure(app.Services.GetRequiredService<IErrorLocalizer>());
+
+await app.RunAsync();

@@ -1,6 +1,6 @@
-using NetStructre.Infrastructure.DtoBase.ResponseBase;
+using Infrastructure.DtoBase.ResponseBase;
 
-namespace NetStructre.UserManagement.Dto.Response;
+namespace Server.UserManagement.Dto.Response;
 
 public record SignInResponse : ResponseBase
 {

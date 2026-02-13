@@ -1,6 +1,6 @@
-using NetStructre.UserManagement.Domain.Abstract;
+using Server.UserManagement.Domain.Abstract;
 
-namespace NetStructre.UserManagement.Domain.User;
+namespace Server.UserManagement.Domain.User;
 
 public class UserService : IUserService
 {

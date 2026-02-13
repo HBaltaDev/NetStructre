@@ -1,7 +1,7 @@
-using NetStructre.UserManagement.Dto.Request;
-using NetStructre.UserManagement.Dto.Response;
+using Server.UserManagement.Dto.Request;
+using Server.UserManagement.Dto.Response;
 
-namespace NetStructre.Applications.UserManagement.Abstract;
+namespace Server.Applications.UserManagement.Abstract;
 
 public interface IDtoAssembler
 {

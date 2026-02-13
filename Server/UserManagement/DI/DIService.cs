@@ -1,9 +1,10 @@
-using NetStructre.Applications.UserManagement;
-using NetStructre.Applications.UserManagement.Abstract;
-using NetStructre.UserManagement.Domain.Abstract;
-using NetStructre.UserManagement.Domain.User;
+using Server.Applications.UserManagement;
+using Server.Applications.UserManagement.Abstract;
+using Server.UserManagement.Domain.Abstract;
+using Server.UserManagement.Domain.User;
+using Server.UserManagement.Application;
 
-namespace NetStructre.UserManagement.DI;
+namespace Server.UserManagement.DI;
 
 public static class DIService
 {

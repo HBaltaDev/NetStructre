@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Hosting;
 
-namespace NetStructre;
+namespace Server;
 
 public class Worker : BackgroundService
 {

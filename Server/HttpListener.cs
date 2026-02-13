@@ -1,11 +1,12 @@
 using System.Reflection;
 using System.Text.Json;
-using NetStructre.Applications.UserManagement.Abstract;
-using NetStructre.Infrastructure.DtoBase.ResponseBase;
-using NetStructre.Infrastructure.ExectionHandling;
-using NetStructre.UserManagement.Dto.Request;
+using Infrastructure.DtoBase.ResponseBase;
+using Infrastructure.ExceptionHandling;
+using Server.Applications.UserManagement.Abstract;
+using Server.Infrastructure.ExectionHandling;
+using Server.UserManagement.Dto.Request;
 
-namespace NetStructre;
+namespace Server;
 
 public class HttpListener
 {

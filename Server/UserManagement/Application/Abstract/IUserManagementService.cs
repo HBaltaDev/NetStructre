@@ -1,7 +1,8 @@
-using NetStructre.Infrastructure.DtoBase.ResponseBase;
-using NetStructre.UserManagement.Dto.Request;
+using Infrastructure.DtoBase.ResponseBase;
+using Server.UserManagement.Dto.Request;
+using Server;
 
-namespace NetStructre.Applications.UserManagement.Abstract;
+namespace Server.Applications.UserManagement.Abstract;
 
 public interface IUserManagementService : IApplicationService
 {

@@ -1,4 +1,4 @@
-namespace NetStructre.UserManagement.Domain.User;
+namespace Server.UserManagement.Domain.User;
 
 public class User
 {
