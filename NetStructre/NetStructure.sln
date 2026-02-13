@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server\Server.csproj", "{372C6CC7-C017-4F85-9C96-D98B22133788}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{CC98E0A0-AB18-4E57-A9EB-81B959FC80D0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Src", "Src", "{788F5E11-3E49-4EE0-9D0C-6F9D8BA88E3B}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore.txt = .gitignore.txt
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{372C6CC7-C017-4F85-9C96-D98B22133788}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{372C6CC7-C017-4F85-9C96-D98B22133788}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{372C6CC7-C017-4F85-9C96-D98B22133788}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{372C6CC7-C017-4F85-9C96-D98B22133788}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC98E0A0-AB18-4E57-A9EB-81B959FC80D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC98E0A0-AB18-4E57-A9EB-81B959FC80D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC98E0A0-AB18-4E57-A9EB-81B959FC80D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC98E0A0-AB18-4E57-A9EB-81B959FC80D0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CC98E0A0-AB18-4E57-A9EB-81B959FC80D0} = {788F5E11-3E49-4EE0-9D0C-6F9D8BA88E3B}
+		{372C6CC7-C017-4F85-9C96-D98B22133788} = {788F5E11-3E49-4EE0-9D0C-6F9D8BA88E3B}
+	EndGlobalSection
+EndGlobal
