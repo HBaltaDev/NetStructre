@@ -1,4 +1,5 @@
 {
   "USER_NOT_FOUND": "User Not Found",
-  "EMAIL_EXISTS": "Mail Already Exist"
+  "EMAIL_EXISTS": "Mail Already Exist",
+  "SYSTEM_ERROR": "System please talk with tech support"
 }

@@ -4,6 +4,8 @@ using Infrastructure.DtoBase.ResponseBase;
 using Infrastructure.ExceptionHandling;
 using Server.Applications.UserManagement.Abstract;
 using Server.Infrastructure.ExectionHandling;
+using Server.Infrastructure.ExectionHandling.ErrorMessage;
+using Server.Infrastructure.ExectionHandling.Localization;
 using Server.UserManagement.Dto.Request;
 
 namespace Server;
@@ -13,13 +15,15 @@ public class HttpListener
     private readonly Dictionary<string, MethodInfo> _actions;
     private readonly Dictionary<string, Type> _parameterTypes;
     private readonly IServiceProvider _serviceProvider;
+    private readonly IErrorLocalizer _errorLocalizer;
     
-    public HttpListener(IServiceProvider serviceProvider)
+    public HttpListener(IServiceProvider serviceProvider, IErrorLocalizer errorLocalizer)
     {
         _actions = new Dictionary<string, MethodInfo>();
         _parameterTypes = new Dictionary<string, Type>();
         
         _serviceProvider = serviceProvider;
+        _errorLocalizer = errorLocalizer;
         
         using var scope = _serviceProvider.CreateScope();
         
@@ -94,13 +98,13 @@ public class HttpListener
         {
             context.Response.Headers.Append("Content-Type", "application/json");
             context.Response.StatusCode = (int)exception.StatusCode;
-            await context.Response.WriteAsync(exception.Description);
+            await context.Response.WriteAsync(_errorLocalizer.GetDescription(exception.Description, "en"));
         }
         catch (Exception exception)
         {
             context.Response.Headers.Append("Content-Type", "application/json");
-            context.Response.StatusCode = 500;
-            await context.Response.WriteAsync(exception.ToString());
+            context.Response.StatusCode = (int)ErrorDefinitions.SystemError.StatusCode;
+            await context.Response.WriteAsync(_errorLocalizer.GetDescription(ErrorDefinitions.SystemError.Description, "en"));
         }
     }
 }

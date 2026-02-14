@@ -1,4 +1,5 @@
 {
   "USER_NOT_FOUND": "Kullanıcı bulunamadı",
-  "EMAIL_EXISTS": "Email zaten kayıtlı"
+  "EMAIL_EXISTS": "Email zaten kayıtlı",
+  "SYSTEM_ERROR": "Sistem hatası lütfen teknik desteğe başvurun"
 }

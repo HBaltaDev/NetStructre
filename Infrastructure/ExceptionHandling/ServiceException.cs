@@ -4,10 +4,8 @@ using Server.Infrastructure.ExectionHandling.Localization;
 
 namespace Infrastructure.ExceptionHandling;
 
-public class ServiceException(Error error, string? language = null) : Exception
+public class ServiceException(Error error) : Exception
 { 
-     private static IErrorLocalizer? _localizer;
-     public static void Configure(IErrorLocalizer localizer) => _localizer = localizer;
      public StatusCodes StatusCode { get; } = error.StatusCode;
-     public string Description { get; } = _localizer!.GetDescription(error.Description, language ?? "en");
+     public string Description { get; } = error.Description;
 } 

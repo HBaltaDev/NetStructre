@@ -34,6 +34,5 @@ C:\Users\Administrator\RiderProjects\NetStructre\Server\obj\Debug\net10.0\refint
 C:\Users\Administrator\RiderProjects\NetStructre\Server\obj\Debug\net10.0\Server.pdb
 C:\Users\Administrator\RiderProjects\NetStructre\Server\obj\Debug\net10.0\Server.genruntimeconfig.cache
 C:\Users\Administrator\RiderProjects\NetStructre\Server\obj\Debug\net10.0\ref\Server.dll
-C:\Users\Administrator\RiderProjects\NetStructre\Server\bin\Debug\net10.0\Recoures\errors-en.json
-C:\Users\Administrator\RiderProjects\NetStructre\Server\bin\Debug\net10.0\Recoures\errors-tr.json
-C:\Users\Administrator\RiderProjects\NetStructre\Server\bin\Debug\net10.0\re\test.json
+C:\Users\Administrator\RiderProjects\NetStructre\Server\bin\Debug\net10.0\Resources\errors-en.json
+C:\Users\Administrator\RiderProjects\NetStructre\Server\bin\Debug\net10.0\Resources\errors-tr.json

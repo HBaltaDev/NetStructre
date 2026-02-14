@@ -6,13 +6,11 @@ using Server.Infrastructure.ExectionHandling.Localization;
 
 var builder = Host.CreateApplicationBuilder(args);
 
-builder.Services.AddApplicationServices();
-builder.Services.AddHostedService<Worker>();
-        
 builder.Services.AddSingleton<IErrorLocalizer, ErrorLocalizer>();
 
-var app = builder.Build();
+builder.Services.AddApplicationServices();
+builder.Services.AddHostedService<Worker>();
 
-ServiceException.Configure(app.Services.GetRequiredService<IErrorLocalizer>());
+var app = builder.Build();
 
 await app.RunAsync();
