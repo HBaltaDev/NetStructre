@@ -1,0 +1,45 @@
+version: '3.9'
+
+services:
+
+  db-server:
+    image: kartoza/postgis
+    networks:
+      - ArchitectDDD
+    volumes:
+      - ./.docker/db-storage:/var/lib/postgresql
+      - ./.docker/db-backup:/root/db-backup
+      - ./.docker/init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      POSTGRES_USER_FILE: /run/secrets/db-username
+      POSTGRES_PASS_FILE: /run/secrets/db-password
+      POSTGRES_DB: 'postgres'
+      ALLOW_IP_RANGE: '0.0.0.0/0'
+      POSTGRES_MULTIPLE_EXTENSIONS: 'postgis,hstore,postgis_topology,postgis_raster,pgrouting'
+    secrets:
+      - db-username
+      - db-password
+    ports:
+      - 5432:5432
+    restart: always
+  
+  cache-server:
+    image: redis
+    networks:
+      - ArchitectDDD
+    ports:
+      - 6379:6379
+    restart: always
+
+secrets:
+  db-username:
+    file: .docker/db-info/db-username
+  db-password:
+    file: .docker/db-info/db-password
+
+networks:
+  ArchitectDDD:
+    driver: bridge
+
+volumes:
+  db-storage:
