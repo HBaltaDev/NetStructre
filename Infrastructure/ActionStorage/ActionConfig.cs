@@ -10,7 +10,7 @@ public static class ActionConfig
         {
             #region User
 
-            {"SignIn", new ActionDescriptor(false, false, typeof(void), null)}        
+            {"SignInAsync", new ActionDescriptor(false, false, typeof(void), null)}        
 
             #endregion
         };

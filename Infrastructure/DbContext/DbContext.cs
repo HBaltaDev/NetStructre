@@ -39,6 +39,8 @@ public class DbContext : IDbContext
             await _transaction.CommitAsync();
 
             await _transaction.DisposeAsync();
+            
+            await _connection.CloseAsync();
 
             _transaction = null;
         }
@@ -51,6 +53,8 @@ public class DbContext : IDbContext
             await _transaction.RollbackAsync();
        
             await _transaction.DisposeAsync();
+            
+            await _connection.CloseAsync();
 
             _transaction = null;
         }

@@ -13,7 +13,7 @@ public class UserManagementService(IUserService userService, IDtoAssembler dtoAs
     public async Task<ResponseBase> SignInAsync(SignInRequest request)
     {
         //throw new ServiceException(StatusCodes.ALREADY_EXISTS, "Test");
-        throw new ServiceException(ErrorDefinitions.UserNotFound);
+        //throw new ServiceException(ErrorDefinitions.UserNotFound);
         
         var result = await userService.SignIn(request.Email, request.Password);
         

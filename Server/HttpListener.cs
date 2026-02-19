@@ -1,5 +1,6 @@
 using System.Reflection;
 using System.Text.Json;
+using Infrastructure.DbContext;
 using Infrastructure.DtoBase.ResponseBase;
 using Infrastructure.ExceptionHandling;
 using Server.Applications.UserManagement.Abstract;
@@ -68,26 +69,48 @@ public class HttpListener
     
     private async Task HttpRequestReceived(HttpContext context)
     {
+        var actionName = "test";
+        var response = "";
+        if (context.Request.Headers["Action"].Count != 0)
+        {
+            actionName = context.Request.Headers["Action"];
+        }
+        
+        using var scope = _serviceProvider.CreateScope();
+        
+        var dbContext = scope.ServiceProvider.GetRequiredService<IDbContext>();
+
+        var isTransactionRequired = false;
+        
+        var isAuditLogRequired = false;
+        
         try
         {
-            var actionName = "test";
-            var response = "";
-            if (context.Request.Headers["Action"].Count != 0)
-            {
-                actionName = context.Request.Headers["Action"];
-            }
-        
             if (_actions.TryGetValue(actionName!, out var actionMethod) && _parameterTypes.TryGetValue(actionName!, out var paramType))
             {
+                var action = ActionConfig.GetActionConfig(actionMethod.Name);
+
+                isTransactionRequired = action!.TransactionRequired;
+                isAuditLogRequired = action!.AuditLogRequired;
+                
                 var dtoRequest = paramType.Name != "RequestBase" ? await JsonSerializer.DeserializeAsync(context.Request.Body, paramType) : null;
-            
+                    
                 var serviceType = actionMethod.DeclaringType!;
 
-                var service = _serviceProvider.GetRequiredService(serviceType);
-
+                var service = scope.ServiceProvider.GetRequiredService(serviceType);
+                    
+                await dbContext.CreateConnectionAsync(Environment.GetEnvironmentVariable("DB_CONNECTION_STRING")!);
+                    
                 var responseObj = await (Task<ResponseBase>)actionMethod.Invoke(service, [dtoRequest])!;
                 
                 response = JsonSerializer.Serialize(responseObj, responseObj.GetType());
+
+                if (isTransactionRequired)
+                {
+                    await dbContext.CommitAsync();
+                }
+
+                await dbContext.CloseConnectionAsync();
             }
 
             context.Response.Headers.Append("Content-Type", "application/json");
@@ -102,8 +125,14 @@ public class HttpListener
         }
         catch (Exception exception)
         {
+            if (isTransactionRequired)
+            {
+                await dbContext.RollbackAsync();
+            }
+            
             context.Response.Headers.Append("Content-Type", "application/json");
             context.Response.StatusCode = (int)ErrorDefinitions.SystemError.StatusCode;
+            Console.WriteLine(exception.Message);
             await context.Response.WriteAsync(_errorLocalizer.GetDescription(ErrorDefinitions.SystemError.Description, "en"));
         }
     }
